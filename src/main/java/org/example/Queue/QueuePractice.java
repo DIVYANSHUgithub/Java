@@ -2,6 +2,7 @@ package org.example.Queue;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class QueuePractice{
     public static void main(String[] args)  {
@@ -31,21 +32,53 @@ public class QueuePractice{
              it returns false  and didn't interrupt whole program.
 
          */
-        Queue<Integer> queue=new LinkedList<>();
+        Queue<Integer> queue=new ArrayBlockingQueue<>(4);
 
         //offer() method
-        queue.offer(4);
-        queue.offer(20);
+                    // it will insert into the queue without violating capacity restriction
+                    // return true if successful inserted otherwise return false.
+                    queue.offer(4);// true
+                    queue.offer(20); // true
+                    queue.offer(20); // true
+
+
         // add() method
-        queue.add(1);
-        queue.add(4);
+                    // it will insert into the queue without violating capacity restriction
+                    // return true if successful inserted otherwise return IllegalStateException.
+                    queue.add(1);// true
+
+        // offer() method used to  show false state of offer() method
+                    queue.offer(20);// false
+        /*--->>*/   //queue.add(4); // exception
+
+
         // addAll() method
+
         // poll() method
-        queue.poll();
+                    // it will retrieves and remove the head element of the queue
+                    // returns element on successful removal or null me queue will be empty
+                            queue.poll();//-> 4
+                            queue.poll();// -> 20
+                            queue.poll();// -> 20
+                            queue.poll();// ->1
+                            queue.poll();// null
+
         // element() method
+            // it retrieves the head element without removing that
+            // it returns element if retrieves successfully otherwise it returns exception if the queue will empty
+                //queue.element();// exception
+                queue.add(4);
+                queue.element();// 4
+
+
         // peek() method
-        System.out.println(queue.peek());
+            // it retrieves the head element without removing that
+            // it returns element if retrieves successfully otherwise it returns null if the queue will empty
+                queue.peek();//4
+                queue.poll();// 4
+                queue.peek();//null
         // equals() method
+        queue.equals(4);
         // contains() method
         // containsAll() method
         // isEmpty() method
@@ -61,14 +94,6 @@ public class QueuePractice{
         // toArray() method
         // toArray() method
         // stream() method
-
-        try{
-
-            Thread.sleep(1000);
-            System.out.println("hello");
-        } catch (Exception e) {
-            System.out.println("2");
-        }
 
     }
 }
